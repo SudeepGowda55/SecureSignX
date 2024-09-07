@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-// import { createAttestation } from './attestation';
-import { client } from '@/utils/signprotocol-client';
+import { createAttestation } from './attestation';
 
 const Page = () => {
 
@@ -12,23 +11,6 @@ const Page = () => {
   const [attestor, setAttestor] = useState('');
   const [submitter, setSubmitter] = useState('');
   const [complianceStatus, setComplianceStatus] = useState('');
-
-  const createAttestation = async (document_name, document_hash, ipfs_cid, attestor, submitter, compliance_status) => {
-    await client.createAttestation({
-      schemaId: "0x22c",
-      data: {
-        document_name,
-        document_hash,
-        ipfs_cid,
-        attestor,
-        submitter,
-        compliance_status
-      },
-      indexingValue: attestor.toLowerCase()
-    })
-
-    // return res
-  }
 
   const [message, setMessage] = useState('');
 
@@ -77,7 +59,7 @@ const Page = () => {
 
           <button type="submit">Create Attestation</button>
         </form>
-        {/* {message && <p>{message}</p>} */}
+        {message && <p>{message}</p>}
         {/* <button onClick={() => attestation()}>Create attestaion</button> */}
       </div>
     </div>
