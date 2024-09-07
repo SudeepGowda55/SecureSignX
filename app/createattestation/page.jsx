@@ -59,7 +59,7 @@ const Page = () => {
 
           <button type="submit">Create Attestation</button>
         </form>
-        {message && <p>{message}</p>}
+        {/* {message && <p>{message}</p>} */}
         {/* <button onClick={() => attestation()}>Create attestaion</button> */}
       </div>
     </div>
