@@ -2,7 +2,7 @@ import { client } from "./signprotocol-client"
 
 const createSchema = async () => {
     const res = await client.createSchema({
-        name: "Decentralised compliance platform",
+        name: "SecureSignX",
         data: [
             { name: "document_name", type: "string" },
             { name: "document_hash", type: "string" },
