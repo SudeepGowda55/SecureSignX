@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@ethsign/sp-sdk": "^0.7.3",
+    "@web3auth/base": "^8.12.4",
+    "@web3auth/ethereum-provider": "^8.12.4",
+    "@web3auth/modal": "^8.12.7",
     "axios": "^1.7.7",
+    "ethers": "^6.13.2",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18",
