@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import RPC from "@/lib/ethersRPC";
 
-const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID; 
+const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID;
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -33,7 +33,7 @@ const web3auth = new Web3Auth({
 });
 
 function App() {
-  const [provider, setProvider] = useState<IProvider | null>(null);
+  const [provider, setProvider] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
