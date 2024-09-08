@@ -130,7 +130,7 @@ export default function Home() {
             </div>
             <div className="mt-12 flex flex-col items-center justify-center">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4">
-                Make document verifications faster and easier
+                Make document verifications Faster and Effective
               </h2>
               <div className="mt-10">
                 {isConnected ? (

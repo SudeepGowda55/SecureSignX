@@ -4,10 +4,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useAccount } from "wagmi"
 import { decodeAbiParameters } from 'viem';
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
     const [attests, setAttests] = useState([]);
-
+    const router = useRouter();
     const { address } = useAccount();
 
     const decodeAttestation = async (attestation) => {
@@ -55,9 +56,8 @@ const Page = () => {
             const decoded = await decodeAttestation(response.data.data?.rows);
             if (decoded) {
                 setAttests(decoded);
-                console.log(decoded);
             } else {
-                console.log("No attestations found.");
+                alert("No attested docs found.");
             }
         } catch (error) {
             console.error("Error fetching attestations:", error);
@@ -94,12 +94,16 @@ const Page = () => {
                     </tbody>
                 </table>) :
                 <h3 className="text-3xl mt-3 font-semibold text-center mb-6 text-white">
-                    No Document Found
+                    No Document Attested yet, but please click the button to check it again
                 </h3>
             }
             <button className=" mx-10 my-5 py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 onClick={() => queryAttestations(address)}>
-                Get attestations
+                Check for attested docs
+            </button>
+            <button className='mx-10 my-5 py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                type="button" onClick={() => router.push('/upload')}>
+                Upload a legal document
             </button>
         </div>
     )
