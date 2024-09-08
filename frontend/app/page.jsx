@@ -3,9 +3,13 @@
 import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useAccount } from "wagmi";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
+
+  const { isConnected } = useAccount();
+
   const [isOpen, setIsOpen] = useState(false);
   const [showQuickLinks, setShowQuickLinks] = useState(false);
   const [showContactUs, setShowContactUs] = useState(false);
@@ -68,12 +72,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                <Link
-                  href="#sign-in"
-                  className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
-                >
-                  Sign In
-                </Link>
+                <w3m-button />
               </div>
             </div>
           </div>
@@ -107,12 +106,7 @@ export default function Home() {
             </div>
             <div className="pt-4 pb-3 border-t border-gray-700">
               <div className="px-5">
-                <Link
-                  href="#sign-in"
-                  className="bg-blue-500 hover:bg-blue-700 text-white block text-center px-4 py-2 rounded-md text-base font-medium"
-                >
-                  Sign In
-                </Link>
+                <w3m-button />
               </div>
             </div>
           </div>
@@ -140,12 +134,16 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4">
                 Make document verifications faster and easier
               </h2>
-              <Link
-                href="/sign-in"
-                className="bg-blue-500 text-white px-6 py-3 m-10 rounded-md shadow-md hover:bg-blue-600 transition duration-300 inline-block"
-              >
-                Sign In
-              </Link>
+              {isConnected ? (
+                <Link
+                  href="/dashboard"
+                  className="bg-blue-500 text-white px-6 py-3 m-10 rounded-md shadow-md hover:bg-blue-600 transition duration-300 inline-block"
+                >
+                  Go to Dashboard
+                </Link>
+              ) : (
+                <w3m-button />
+              )}
             </div>
           </div>
         </main>
