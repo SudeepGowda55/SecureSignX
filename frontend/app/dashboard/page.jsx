@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useAccount } from "wagmi"
 import { decodeAbiParameters } from 'viem';
 import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 
 const Page = () => {
     const [attests, setAttests] = useState([]);
@@ -105,7 +106,22 @@ const Page = () => {
                 type="button" onClick={() => router.push('/upload')}>
                 Upload a legal document
             </button>
-        </div>
+            <div className='text-white left-3 relative m-10 flex flex-col space-y-10'>
+                <p>Visit the XMTP Chat app to get real time notification regarding attested documents</p>
+                <div>
+                    <Link href={"https://xmtp-chat-app.vercel.app/"} className='text-white mx-10 my-5 py-2 px-4 bg-blue-600 font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
+                        click here for xmtp chat app
+                    </Link>
+                </div>
+            </div>
+            <div className='text-white left-3 relative m-10 flex flex-col space-y-10'>
+                <p>If you are the compliance officer please click here for creating attestations</p>
+                <button className='m-10 w-[10%] py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                    type="button" onClick={() => router.push('/createattestation')}>
+                    Attestation creation page
+                </button>
+            </div>
+        </div >
     )
 }
 

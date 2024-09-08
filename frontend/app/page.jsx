@@ -40,13 +40,13 @@ export default function Home() {
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0">
-                  <Link href="#home" className="text-2xl font-bold">
+                  <Link href="/" className="text-2xl font-bold">
                     Secure SignX
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-4">
                   <Link
-                    href="#home"
+                    href="/"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Home
@@ -64,10 +64,10 @@ export default function Home() {
                     About
                   </Link>
                   <Link
-                    href="#contact"
+                    href="/dashboard"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Contact
+                    Dashboard
                   </Link>
                 </div>
               </div>
@@ -80,7 +80,7 @@ export default function Home() {
           <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
-                href="#home"
+                href="/"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
                 Home
@@ -98,10 +98,10 @@ export default function Home() {
                 About
               </Link>
               <Link
-                href="#contact"
+                href="/dashboard"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
-                Contact
+                Dashboard
               </Link>
             </div>
             <div className="pt-4 pb-3 border-t border-gray-700">
