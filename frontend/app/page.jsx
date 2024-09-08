@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // Ensure you have installed @heroicons/react
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
