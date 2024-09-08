@@ -13,16 +13,16 @@ async function sendCustomerGreeting(context) {
     `You will be notified once your document is approved or rejected.\n\n` +
     `You can:\n` +
     `1. Check status of your document: status <hash>`;
-  await context.send(greetingMessage, context.message.sender.address);
+  await context.sendTo(greetingMessage, [context.message.sender.address]);
 }
 
 async function queryDocumentStatus(context, documentHash) {
   const documentData = inMemoryCache.get(documentHash);
 
   if (!documentData) {
-    await context.send(
+    await context.sendTo(
       `No document found with the hash: ${documentHash}`,
-      context.message.sender.address
+      [context.message.sender.address]
     );
   } else {
     const statusMessage =
@@ -31,7 +31,7 @@ async function queryDocumentStatus(context, documentHash) {
       `Document Hash: ${documentData.document_hash}\n` +
       `Compliance Status: ${documentData.compliance_status}\n\n` +
       `View Document: https://ipfs.infura.io/ipfs/${documentData.ipfs_cid}\n\n`;
-    await context.send(statusMessage, context.message.sender.address);
+    await context.sendTo(statusMessage, [context.message.sender.address]);
   }
 }
 
@@ -42,7 +42,7 @@ async function sendOfficerGreeting(context) {
     `1. Approve a document: "approve <hash>"\n` +
     `2. Reject a document: "reject <hash>"\n` +
     `3. List all pending documents for review: "list pending"`;
-  await context.send(greetingMessage, context.message.sender.address);
+  await context.sendTo(greetingMessage, [context.message.sender.address]);
 }
 
 async function sendManagerGreeting(context) {
@@ -51,7 +51,7 @@ async function sendManagerGreeting(context) {
     `As a manager, you can use the following command to view reports:\n\n` +
     `1. View document status report: "view reports"\n\n` +
     `For more assistance, type "help".`;
-  await context.send(message, context.message.sender.address);
+  await context.sendTo(message, [context.message.sender.address]);
 }
 
 function parseDocumentMessage(text) {
@@ -111,7 +111,7 @@ async function generateReports(context) {
     reportMessage = "No documents have been submitted yet.";
   }
 
-  await context.send(reportMessage, context.message.sender.address);
+  await context.sendTo(reportMessage, [context.message.sender.address]);
 }
 
 run(async (context) => {
@@ -199,7 +199,7 @@ run(async (context) => {
   } else if (text.toLowerCase() === "list pending") {
     if (senderAddress === complianceOfficerAddress) {
       const pendingList = listPendingDocuments();
-      await context.send(pendingList, senderAddress);
+      await context.sendTo(pendingList, [senderAddress]);
     } else {
       await context.send(
         "You are not authorized to view the pending documents."
@@ -209,9 +209,9 @@ run(async (context) => {
     if (senderAddress === managerAddress) {
       await generateReports(context);
     } else {
-      await context.send(
+      await context.sendTo(
         "You are not authorized to view reports.",
-        senderAddress
+        [senderAddress]
       );
     }
   } else if (text.toLowerCase().startsWith("status ")) {
@@ -221,26 +221,26 @@ run(async (context) => {
     await queryDocumentStatus(context, documentHash);
   } else {
     if (senderAddress === complianceOfficerAddress) {
-      await context.send(
+      await context.sendTo(
         `Invalid command. As a compliance officer, you can use the following commands:\n\n` +
           `1. Accept a document: "accept <hash>"\n` +
           `2. Reject a document: "reject <hash>"\n` +
           `3. List pending documents: "list pending"\n` +
           `For more help, type "help".`,
-        senderAddress
+        [senderAddress]
       );
     } else if (senderAddress === managerAddress) {
-      await context.send(
+      await context.sendTo(
         `Invalid command. As a manager, you can use the following command:\n\n` +
           `1. View document status report: "view reports"\n\n` +
           `For more help, type "help".`,
-        senderAddress
+        [senderAddress]
       );
     } else {
-      await context.send(
+      await context.sendTo(
         `Invalid command. As a customer, you can submit a document:\n\n` +
           `For more help, type "help".`,
-        senderAddress
+        [senderAddress]
       );
     }
   }
