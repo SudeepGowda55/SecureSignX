@@ -1,4 +1,6 @@
-"use client"
+"use client";
+import { Client } from "@xmtp/xmtp-js";
+import { Wallet } from "ethers";
 import { useState } from "react";
 
 const UploadPage = () => {
@@ -16,18 +18,53 @@ const UploadPage = () => {
       const data = new FormData();
       data.append("file", file);
 
-      const request = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${JWT}`,
-        },
-        body: data,
-      });
+      const request = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${JWT}`,
+          },
+          body: data,
+        }
+      );
 
       const response = await request.json();
+      console.log(response);
       setIpfsHash(response.IpfsHash); // Store the CID
+
+      // Call the function to send the document info via XMTP after uploading
+      await submitDocInfo(response.IpfsHash);
     } catch (error) {
       console.error("Error uploading file:", error);
+    }
+  };
+
+  const submitDocInfo = async (ipfsCid) => {
+    try {
+      const testWallet = new Wallet(process.env.NEXT_PUBLIC_TEST_KEY);
+      const xmtp = await Client.create(testWallet);
+
+      const botAddress = "0x9223a195cbaC6D5411367e7f316F900670a11d77";
+      const conversation = await xmtp.conversations.newConversation(botAddress);
+
+      const documentData = {
+        document_name: file.name,
+        document_hash: "HashPlaceholder", // You can compute the actual hash
+        ipfs_cid: ipfsCid,
+        attestor: "0xF6C3E769D1cA665C93ec15f683D8da84F79BBd19",
+        submitter: "0x8d0B70292ca6ea1a2Ea97A57C17e9Bb336fa291f",
+        compliance_status: "submitted",
+        view: `https://ipfs.io/ipfs/${ipfsCid}`,
+      };
+
+      const documentMessage = `Document Submission:\nName:${documentData.document_name}\nHash:${documentData.document_hash}\nIPFS CID:${documentData.ipfs_cid}\nAttestor:${documentData.attestor}\nSubmitter:${documentData.submitter}\nStatus:${documentData.compliance_status}\n\nView Document:${documentData.view}`;
+
+      await conversation.send(documentMessage);
+
+      console.log("Message sent to bot: documentData");
+    } catch (error) {
+      console.error("Error sending document data:", error);
     }
   };
 
