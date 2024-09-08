@@ -1,14 +1,28 @@
 {
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "prettier" // Add "prettier" last. This will turn off eslint rules conflicting with prettier. This is not what formats the code.
-  ],
+  "root": true,
+  "extends": ["xmtp-web"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@next/next/no-img-element": "off",
-    "curly": "error"
-  }
+    "no-plusplus": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksConditionals": true
+      }
+    ]
+  },
+  "overrides": [
+    // allow require in .config.js files
+    {
+      "files": ["*.config.js"],
+      "rules": {
+        "global-require": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
 }
