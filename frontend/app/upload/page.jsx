@@ -1,5 +1,6 @@
 "use client";
 
+import axios from 'axios'; // Import axios
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -57,30 +58,63 @@ const DashboardPage = () => {
     }
     setIsLoading(true);
 
-    // Simulate file upload and get public file URL
-    let uploadedBytes = 0;
-    const totalBytes = file.size;
+    // Prepare the file metadata
+    const formData = {
+      files: [
+        {
+          fileName: file.name,
+          contentType: file.type
+        }
+      ]
+    };
 
-    const interval = setInterval(() => {
-      uploadedBytes += totalBytes * 0.1; // Simulate 10% progress on each interval
-      const percentCompleted = Math.min(
-        Math.round((uploadedBytes * 100) / totalBytes),
-        100
+    try {
+      // Step 1: Get the session UUID
+      const response = await axios.post(
+        'https://api.apillon.io/storage/buckets/9169ada5-c152-4fec-8c44-f416671473f5/upload',
+        formData,
+        {
+          headers: {
+            Authorization: 'Basic NGU0NWJiYjYtZDg4ZS00ZTQ5LWE5NmQtMTdhMWVmMzVkMTc2OjEkSEhBZDY2ZnclNA==',
+            'Content-Type': 'application/json'
+          }
+        }
       );
-      setProgress(percentCompleted);
 
-      if (percentCompleted === 100) {
-        clearInterval(interval);
-        setIsLoading(false);
-        setObjectId("mock-object-id"); // Set mock ObjectID after completion
+      if (response.status === 201) {
+        const sessionUuid = response.data.data.sessionUuid;
+        const fileData = response.data.data.files[0];
 
-        // Simulate getting a public URL after uploading to a server
-        const simulatedURL = URL.createObjectURL(file);
-        setFileURL(simulatedURL); // Update fileURL state with the uploaded file's public URL
-        console.log('File successfully uploaded', simulatedURL);
+        console.log('File upload session started', response.data);
+
+        // Prepare file upload to S3 or another service
+        const fileUploadResponse = await axios.put(
+          fileData.url,
+          file,
+          {
+            headers: {
+              'Content-Type': file.type
+            }
+          }
+        );
+
+        if (fileUploadResponse.status === 200) {
+          console.log('File successfully uploaded', fileData.url);
+          setObjectId(fileData.fileUuid);
+          setFileURL(fileData.url); // Set the uploaded file's public URL
+        } else {
+          console.error('Error uploading file to S3:', fileUploadResponse.data);
+        }
+      } else {
+        console.error('Error initializing upload session:', response.data);
       }
-    }, 300);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
 
   const handleReupload = () => {
     setFile(null);
@@ -93,14 +127,12 @@ const DashboardPage = () => {
     router.push('/dashboard');
   };
 
-  // Function to render the uploaded file based on its type
   const renderFile = () => {
     if (!fileURL) return null;
 
     const fileType = file.type;
 
     if (fileType.startsWith('image/')) {
-      // Render image
       return (
         <div className="mt-4">
           <p>Preview Image:</p>
@@ -108,7 +140,6 @@ const DashboardPage = () => {
         </div>
       );
     } else if (fileType === 'application/pdf') {
-      // Render PDF viewer
       return (
         <div className="mt-4">
           <p>Preview PDF:</p>
@@ -121,10 +152,9 @@ const DashboardPage = () => {
         </div>
       );
     } else if (
-      fileType === 'application/vnd.ms-powerpoint' || // ppt
-      fileType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation' // pptx
+      fileType === 'application/vnd.ms-powerpoint' ||
+      fileType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
     ) {
-      // Render PowerPoint using Google Docs Viewer
       return (
         <div className="mt-4">
           <p>Preview PowerPoint:</p>
@@ -137,10 +167,9 @@ const DashboardPage = () => {
         </div>
       );
     } else if (
-      fileType === 'application/msword' || // doc
-      fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // docx
+      fileType === 'application/msword' ||
+      fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     ) {
-      // Render Word document using Google Docs Viewer
       return (
         <div className="mt-4">
           <p>Preview Word Document:</p>
@@ -153,7 +182,6 @@ const DashboardPage = () => {
         </div>
       );
     } else if (fileType.startsWith('audio/')) {
-      // Render audio
       return (
         <div className="mt-4">
           <p>Preview Audio:</p>
@@ -164,7 +192,6 @@ const DashboardPage = () => {
         </div>
       );
     } else if (fileType.startsWith('video/')) {
-      // Render video
       return (
         <div className="mt-4">
           <p>Preview Video:</p>
