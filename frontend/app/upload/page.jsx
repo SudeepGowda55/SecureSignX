@@ -2,11 +2,13 @@
 import { Client } from "@xmtp/xmtp-js";
 import { Wallet } from "ethers";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
   const [ipfsHash, setIpfsHash] = useState("");
   const JWT = process.env.NEXT_PUBLIC_JWT; // Fetch JWT from environment variables
+  const address = useAccount();
 
   const pinFileToIPFS = async () => {
     try {
@@ -44,7 +46,6 @@ const UploadPage = () => {
     try {
       const testWallet = new Wallet(process.env.NEXT_PUBLIC_TEST_KEY);
       const xmtp = await Client.create(testWallet);
-
       const botAddress = "0x9223a195cbaC6D5411367e7f316F900670a11d77";
       const conversation = await xmtp.conversations.newConversation(botAddress);
 
@@ -53,7 +54,7 @@ const UploadPage = () => {
         document_hash: "HashPlaceholder", // You can compute the actual hash
         ipfs_cid: ipfsCid,
         attestor: "0xF6C3E769D1cA665C93ec15f683D8da84F79BBd19",
-        submitter: "0x8d0B70292ca6ea1a2Ea97A57C17e9Bb336fa291f",
+        submitter: address,
         compliance_status: "submitted",
         view: `https://ipfs.io/ipfs/${ipfsCid}`,
       };
