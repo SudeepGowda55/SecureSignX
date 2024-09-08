@@ -1,10 +1,11 @@
 import { run } from "@xmtp/message-kit";
 
-// to store doc data
 const inMemoryCache = new Map();
 
 function parseDocumentMessage(text) {
+
   const lines = text.split("\n");
+
   return {
     document_name: lines[1].split(":")[1].trim(),
     document_hash: lines[2].split(":")[1].trim(),
@@ -27,8 +28,7 @@ run(async (context) => {
       compliance_status: "pending_approval",
     });
 
-    const complianceOfficerAddress =
-      "0xF6C3E769D1cA665C93ec15f683D8da84F79BBd19";
+    const complianceOfficerAddress = "0xF6C3E769D1cA665C93ec15f683D8da84F79BBd19";
     await context.sendTo(
       `New document requires approval:\n\n${text}\n\nReply with 'approve ${documentData.document_hash}' or 'reject ${documentData.document_hash}'.`,
       [complianceOfficerAddress]
