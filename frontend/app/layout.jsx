@@ -18,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata = {
   title: "SecureSignX",
-  description: "Decentralized compilance platform",
+  description: "Decentralized Compliance Platform",
 };
 
 export default function RootLayout({ children }) {

@@ -4,7 +4,9 @@ import { base, baseSepolia, mainnet, polygon, sepolia } from 'wagmi/chains'
 
 export const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
 
-const metadata = {
+if (!projectId) throw new Error('Project ID is not defined')
+
+export const metadata = {
     name: 'SecureSignX',
     description: 'Decentralized Compliance and Attestation Platform',
     url: 'https://secure-sign-x.vercel.app/',
