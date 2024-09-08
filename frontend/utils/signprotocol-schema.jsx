@@ -9,7 +9,7 @@ const createSchema = async () => {
             { name: "ipfs_cid", type: "string" },
             { name: "attestor", type: "address" }, // The address of the entity (e.g., compliance officer) attesting the document. i.e the signer
             { name: "submitter", type: "address" },  // Identifies who originally submitted the document for attestation.
-            { name: "compliance_status", type: "string" },  // Current compliance status of the document (e.g., "Pending," "Verified").
+            { name: "compliance_status", type: "string" },  // Current compliance status of the document (e.g., "Pending," "Verified", "Rejected").
         ]
     })
 
