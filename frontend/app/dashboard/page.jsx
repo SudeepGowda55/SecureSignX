@@ -66,7 +66,7 @@ const Page = () => {
 
     return (
         <div className=" mx-auto bg-black h-screen" style={{ width: "100vw" }}>
-            <h1 className="text-4xl mt-3 font-semibold text-center mb-6 text-white">GET ATTESTATIONS</h1>
+            <h1 className="text-4xl mt-3 font-semibold text-center mb-6 text-white">Check Your Attestations</h1>
 
             {attests.length > 0 ? (
                 <table className="mx-2 min-w-full bg-white border border-black border-black-200">

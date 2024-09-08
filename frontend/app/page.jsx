@@ -118,32 +118,32 @@ export default function Home() {
               "url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp2533117.png&f=1&nofb=1&ipt=b5e418c6fb536e247f10e66a28b11e7431b3eacb38df4ae10db0342d418d7843&ipo=images)",
           }}
         >
-          <div className="relative max-w-7xl mx-auto p-6">
+          <div className="relative max-w-7xl mx-auto px-6 py-4">
             <h1 className="text-6xl font-extrabold text-white mb-12">
               Welcome to Secure SignX
             </h1>
             <p className="text-xl text-white mb-8">
-              We offer cutting-edge solutions to ensure secure and efficient
-              communication for all your needs. Now make attestations and
-              verifications easy by utilizing our platform.
+              A decentralized compliance and audit trail system for managing document Attestations via Sign Protocol, with Secure communication through XMTP and streamlined interactions using a MessageKit Bot
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               {/* Add any additional content or buttons here */}
             </div>
-            <div className="mt-12">
+            <div className="mt-12 flex flex-col items-center justify-center">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4">
                 Make document verifications faster and easier
               </h2>
-              {isConnected ? (
-                <Link
-                  href="/dashboard"
-                  className="bg-blue-500 text-white px-6 py-3 m-10 rounded-md shadow-md hover:bg-blue-600 transition duration-300 inline-block"
-                >
-                  Go to Dashboard
-                </Link>
-              ) : (
-                <w3m-button />
-              )}
+              <div className="mt-10">
+                {isConnected ? (
+                  <Link
+                    href="/dashboard"
+                    className="bg-blue-500 text-white px-6 py-3 m-10 rounded-md shadow-md hover:bg-blue-600 transition duration-300 inline-block"
+                  >
+                    Go to Dashboard
+                  </Link>
+                ) : (
+                  <w3m-button />
+                )}
+              </div>
             </div>
           </div>
         </main>
@@ -208,7 +208,7 @@ export default function Home() {
               About Us
             </h2>
             <p className="text-xl sm:text-lg lg:text-xl mb-20">
-              At Sign Protocol, we are dedicated to revolutionizing document
+              At Secure SignX, we are dedicated to revolutionizing document
               verification. Our mission is to streamline the verification
               process, ensuring that it is both fast and secure. We believe that
               document verification should be seamless, reliable, and easily
