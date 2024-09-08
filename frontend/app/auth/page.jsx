@@ -176,6 +176,8 @@ function App() {
         <p style={{ whiteSpace: "pre-line" }}></p>
       </div>
 
+      <w3m-button></w3m-button>
+
       <footer className="footer">
         <a
           href="https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/web-modal-sdk/quick-starts/nextjs-modal-quick-start"

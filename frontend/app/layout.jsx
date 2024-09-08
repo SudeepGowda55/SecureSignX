@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { cookieToInitialState } from 'wagmi'
+import { headers } from 'next/headers'
+import { config } from '@/config/index'
+import Web3ModalProvider from '@/context/index'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,17 +17,16 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "De-audit",
+  title: "SecureSignX",
   description: "Decentralized compilance platform",
 };
 
 export default function RootLayout({ children }) {
+  const initialState = cookieToInitialState(config, headers().get('cookie'))
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Web3ModalProvider initialState={initialState}>{children}</Web3ModalProvider>
       </body>
     </html>
   );
