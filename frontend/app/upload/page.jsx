@@ -60,7 +60,7 @@ const UploadPage = () => {
 
       const documentData = {
         document_name: file.name,
-        document_hash: "HashPlaceholder", // You can compute the actual hash
+        document_hash: ipfsCid,
         ipfs_cid: ipfsCid,
         attestor: "0xF6C3E769D1cA665C93ec15f683D8da84F79BBd19",
         submitter: address,
