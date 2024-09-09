@@ -1,8 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { createAttestation, submitAttestationInfo } from "./attestation";
+import { Wallet } from "ethers";
+import { createAttestation } from "./attestation";
+import { Client } from "@xmtp/xmtp-js";
+// import dynamic from "next/dynamic";
 import { useAccount } from "wagmi"
+
+// const Client = dynamic(
+//   () => import("@xmtp/xmtp-js"),
+//   {
+//       ssr: false
+//   }
+// )
 
 const Page = () => {
   const [documentName, setDocumentName] = useState("");
@@ -16,13 +26,39 @@ const Page = () => {
 
   const { address } = useAccount()
 
+  const submitAttestationInfo = async (documentName, ipfsCid, submitter, complianceOfficer) => {
+    try {
+        const managerAddress = "0xbaa877F61b8Fe9D6F18023eA018df8c36e1E9014";
+
+        const testWallet = new Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY);
+        const xmtp = await Client.create(testWallet);
+        const conversation = await xmtp.conversations.newConversation(submitter);
+
+        const documentMessage = `Your document "${documentName}" has been successfully attested. Document Hash: ${ipfsCid}`;
+        await conversation.send(documentMessage);
+
+        console.log("Attestation confirmation sent to submitter:", submitter);
+
+        const managerConversation = await xmtp.conversations.newConversation(managerAddress);
+
+        const managerMessage = `New attestation report:\nDocument Name: ${documentName}\nDocument Hash: ${ipfsCid}\nSubmitter: ${submitter}\nAttestor: ${complianceOfficer}`;
+
+        await managerConversation.send(managerMessage);
+
+        console.log("Attestation report sent to manager:", managerAddress);
+
+    } catch (error) {
+        console.error("Error sending attestation messages:", error);
+    }
+};
+
   const attestation = async (e) => {
     e.preventDefault();
 
-    if (address != complianceOfficer) {
-      alert("Only compliance officer can create attestation.");
-      return;
-    }
+    // if (address != complianceOfficer) {
+    //   alert("Only compliance officer can create attestation.");
+    //   return;
+    // }
 
     try {
       await createAttestation(
@@ -33,7 +69,7 @@ const Page = () => {
         submitter,
         complianceStatus
       );
-      await submitAttestationInfo(ipfsCid);
+      await submitAttestationInfo(documentName, ipfsCid, submitter, complianceOfficer);
       alert("Attestation created successfully!");
       setMessage("Attestation created and a notification to employee has been sent!");
     } catch (error) {
