@@ -1,23 +1,22 @@
 "use client";
 
-// import { Client } from "@xmtp/xmtp-js";
 import { Wallet } from "ethers";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import dynamic from "next/dynamic";
 
 const Client = dynamic(
-    () => import("@xmtp/xmtp-js"),
-    {
-        ssr: false
-    }
+  () => import("@xmtp/xmtp-js"),
+  {
+    ssr: false
+  }
 )
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
   const [ipfsHash, setIpfsHash] = useState("");
   const JWT = process.env.NEXT_PUBLIC_JWT; // Fetch JWT from environment variables
-  const address = useAccount();
+  const { address } = useAccount();
 
   const pinFileToIPFS = async () => {
     try {

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { createAttestation } from "./attestation";
-import {useAccount} from "wagmi"
+import { createAttestation, submitAttestationInfo } from "./attestation";
+import { useAccount } from "wagmi"
 
 const Page = () => {
   const [documentName, setDocumentName] = useState("");
@@ -14,7 +14,7 @@ const Page = () => {
 
   const complianceOfficer = "0x31c577E2875787069d3387A6dC409C89ADfA8B6B";
 
-  const {address} = useAccount()
+  const { address } = useAccount()
 
   const attestation = async (e) => {
     e.preventDefault();
@@ -32,9 +32,10 @@ const Page = () => {
         complianceOfficer,
         submitter,
         complianceStatus
-      ); 
+      );
+      await submitAttestationInfo(ipfsCid);
       alert("Attestation created successfully!");
-      setMessage("Attestation created successfully!");
+      setMessage("Attestation created and a notification to employee has been sent!");
     } catch (error) {
       console.error("Error creating attestation:", error);
       setMessage("Failed to create attestation.");
@@ -122,7 +123,7 @@ const Page = () => {
             value={complianceStatus}
             onChange={(e) => setComplianceStatus(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          required >
+            required >
             <option value="" disabled>
               Select Compliance Status
             </option>
