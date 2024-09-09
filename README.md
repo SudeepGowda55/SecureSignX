@@ -12,13 +12,13 @@ https://xmtp-chat-app.vercel.app/
 
 🧪 Secure SignX is a decentralized compliance and audit trail system for managing document Attestations via Sign Protocol, with Secure communication through XMTP and streamlined interactions using a MessageKit Bot
 
-Currently, Three Decentralised Exchanges are integrated 
+Secure SignX involves two major components
 
-- ✅ **[Uniswap V2](https://app.uniswap.org/?chain=base)**: Factory Contract Address,	V2Router02 Contract Address can be found **[here](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/v2-deployments)**
-  
-- 🧱 **[Sushiswap V2](https://www.sushi.com/swap)**: Factory Contract Address, V2Router02 Contract Address can be found **[here](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/v2-deployments)**
-  
-- 🧱 **[Pankcake Swap V2](https://pancakeswap.finance/info/v2)**: Factory Contract Address, V2Router02 Contract Address can be found **[here](https://docs.pancakeswap.finance/developers/smart-contracts/pancakeswap-exchange/v2-contracts)**
+**Sign Protocol**
+
+Currently, the Secure SignX Attestation Schema is deployed on **Base Sepolia Testnet**
+
+[SecureSignx Sign Protocol Schema](https://testnet-scan.sign.global/schema/onchain_evm_84532_0x22c)
 
 Based on Uniswap V2 Code/Smart Contracts there are 643 Forked Protocols. So we can integrate hundreds of DEX into this bot.
 
@@ -32,7 +32,7 @@ You can access the **Public Explorer** from here [https://dashboard.tenderly.co/
 
 <br />
 
-One more major component here is **World ID**
+The second major component here is **XMTP Protocol**
 
 World ID is a digital identity solution that enables users to anonymize their uniqueness and humanity via zero-knowledge proofs and advanced privacy-preserving cryptography.
 
