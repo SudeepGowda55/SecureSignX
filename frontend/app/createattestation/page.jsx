@@ -29,7 +29,7 @@ const Page = () => {
         documentName,
         documentHash,
         ipfsCid,
-        attestor,
+        complianceOfficer,
         submitter,
         complianceStatus
       ); 
@@ -95,9 +95,7 @@ const Page = () => {
           <input
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             type="text"
-            value={attestor}
-            onChange={(e) => setAttestor(e.target.value)}
-            required
+            value={complianceOfficer}
           />
         </div>
         <div>
