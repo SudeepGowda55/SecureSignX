@@ -2,19 +2,27 @@
 
 import React, { useState } from "react";
 import { createAttestation } from "./attestation";
+import {useAccount} from "wagmi"
 
 const Page = () => {
   const [documentName, setDocumentName] = useState("");
   const [documentHash, setDocumentHash] = useState("");
   const [ipfsCid, setIpfsCid] = useState("");
-  const [attestor, setAttestor] = useState("");
   const [submitter, setSubmitter] = useState("");
   const [complianceStatus, setComplianceStatus] = useState("");
-
   const [message, setMessage] = useState("");
+
+  const complianceOfficer = "0x31c577E2875787069d3387A6dC409C89ADfA8B6B";
+
+  const {address} = useAccount()
 
   const attestation = async (e) => {
     e.preventDefault();
+
+    if (address != complianceOfficer) {
+      alert("Only compliance officer can create attestation.");
+      return;
+    }
 
     try {
       await createAttestation(
@@ -24,7 +32,7 @@ const Page = () => {
         attestor,
         submitter,
         complianceStatus
-      ); // 0xC15e658AC13a89E8D2E5adBBcf29D5d168554553
+      ); 
       alert("Attestation created successfully!");
       setMessage("Attestation created successfully!");
     } catch (error) {
@@ -36,8 +44,9 @@ const Page = () => {
   return (
     <div className=" mx-auto bg-black h-screen" style={{ width: "100vw" }}>
       <h2 className="text-4xl mt-3 font-semibold text-center mb-6 text-white">
-        ATTESTATION PREVIEW
+        ATTESTATION CAN CREATED ONLY BY COMPLIANCE OFFICER
       </h2>
+      <p>Compliance officer address: 0x31c577E2875787069d3387A6dC409C89ADfA8B6B</p>
       <form
         onSubmit={attestation}
         className="bg-white shadow-lg rounded-lg p-6 space-y-6  mx-auto"
