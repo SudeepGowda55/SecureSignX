@@ -46,7 +46,7 @@ const Page = () => {
       <h2 className="text-4xl mt-3 font-semibold text-center mb-6 text-white">
         ATTESTATION CAN CREATED ONLY BY COMPLIANCE OFFICER
       </h2>
-      <p>Compliance officer address: 0x31c577E2875787069d3387A6dC409C89ADfA8B6B</p>
+      <p className="text-4xl mt-3 font-semibold text-center mb-6 text-white">Compliance officer address: 0x31c577E2875787069d3387A6dC409C89ADfA8B6B</p>
       <form
         onSubmit={attestation}
         className="bg-white shadow-lg rounded-lg p-6 space-y-6  mx-auto"
