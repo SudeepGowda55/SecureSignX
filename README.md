@@ -41,6 +41,15 @@ You can view the **Attestations created on Sign Protocol** from here (https://te
 
 The second major component here is **XMTP Protocol**
 
+**XMTP (Extensible Message Transport Protocol)** is used to send real-time notifications to relevant users about document submissions, attestations, and status updates. The system automatically sends notifications to the Manager, Compliance Officer, and Submitter based on the following events:
+
+1. *Document Submission*: When a document is submitted, the bot sends the submission details, including the document name and IPFS CID, to the assigned Compliance Officer for review.
+   
+2. *Attestation Completion*: Once an attestation is made, real-time updates are sent: <br />
+       - Submitter receives a message confirming their document's attestation and status. <br />
+       - Manager receives a detailed attestation report containing the document name, IPFS CID, submitter, attestor, and compliance status. <br />
+       - Compliance Officer is updated on any changes in document status or approval. <br />
+
 A **Compliance Bot** built using **MessageKit** assists users based on their roles: **Manager**, **Compliance Officer**, and **User**. 
 
 The bot is deployed and can be interacted with at the address: *0x9223a195cbaC6D5411367e7f316F900670a11d77*.
