@@ -43,6 +43,8 @@ To see available commands and functionality, simply type **"help"** in the conve
 
 ![Compliance Bot](https://github.com/user-attachments/assets/477d95f5-53a4-4609-b2d5-c77e7b84dac9)
 
+![Manager Report](https://github.com/user-attachments/assets/48b07db1-b548-463c-8d2d-323a4d8bab2c)
+
 <br />
 
 ## For Testing the app 
