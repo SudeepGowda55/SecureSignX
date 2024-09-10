@@ -33,7 +33,11 @@ You can view the **Attestations created on Sign Protocol** from here (https://te
 
 The second major component here is **XMTP Protocol**
 
-World ID is a digital identity solution that enables users to anonymize their uniqueness and humanity via zero-knowledge proofs and advanced privacy-preserving cryptography.
+A **Compliance Bot** built using **MessageKit** assists users based on their roles: **Manager**, **Compliance Officer**, and **User**. 
+
+The bot is deployed and can be interacted with at the address: *0x9223a195cbaC6D5411367e7f316F900670a11d77*.
+
+To see available commands and functionality, simply type **"help"** in the conversation with the bot through **XMTP**.
 
 <br />
 
