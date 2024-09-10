@@ -8,6 +8,8 @@
 
 ![SecureSignX](https://github.com/user-attachments/assets/2dbd2c6f-e090-473e-b572-3cf3a8df31e4)
 
+<br />
+
 🧪 Secure SignX is a decentralized compliance and audit trail system for managing document Attestations via Sign Protocol, with Secure communication through XMTP and streamlined interactions using a MessageKit Bot
 
 Secure SignX involves two major components
@@ -28,6 +30,12 @@ Workflow:
 
 
 You can view the **Attestations created on Sign Protocol** from here (https://testnet-scan.sign.global/schema/onchain_evm_84532_0x22c)
+
+<br />
+
+![sign protocol schema](https://github.com/user-attachments/assets/0845be75-e2a0-48d1-9e8a-1ccd03973d94)
+
+<br />
 
 <br />
 
