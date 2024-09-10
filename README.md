@@ -20,17 +20,16 @@ Currently, the Secure SignX Attestation Schema is deployed on **Base Sepolia Tes
 
 [SecureSignx Sign Protocol Schema](https://testnet-scan.sign.global/schema/onchain_evm_84532_0x22c)
 
-Based on Uniswap V2 Code/Smart Contracts there are 643 Forked Protocols. So we can integrate hundreds of DEX into this bot.
+Workflow:
+
+1. The employee should connect his wallet and then needs to upload the legal Document.
+2. Then the attestation to any legal document can be created only by the Compliance Officer/Auditor.
+3. Then the manager can review the attested documents.
+
 
 The Flash Loan Smart Contract is deployed on **Tenderly's Base Mainnet Virtual Testnet**. 
 
-You can access the **Public Explorer** from here [https://dashboard.tenderly.co/explorer/vnet/753ba0a6-023a-4c8d-b3e4-60f03d6dc4b7/transactions?kind=standard]
-
-<br />
-
-![tenderly explorer](https://github.com/user-attachments/assets/6e1553e4-ec51-4238-85bb-da554580e8ab)
-
-<br />
+You can view the **Attestations created on Sign Protocol** from here (https://testnet-scan.sign.global/schema/onchain_evm_84532_0x22c)
 
 The second major component here is **XMTP Protocol**
 
