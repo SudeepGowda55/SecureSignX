@@ -1,5 +1,3 @@
-https://xmtp-chat-app.vercel.app/
-
 # Secure SignX
 
 <h4 align="center">
