@@ -80,7 +80,7 @@ Before you begin, you need to install the following tools:
 - Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
 - [Git](https://git-scm.com/downloads)
 
-To get started with Swift Yield Development, follow the steps below:
+To get started with Secure SignX Development, follow the steps below:
 
 1. Install Tenderly CLI
 
