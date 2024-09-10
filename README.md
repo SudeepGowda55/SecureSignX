@@ -41,7 +41,7 @@ To see available commands and functionality, simply type **"help"** in the conve
 
 <br />
 
-![worldid](https://github.com/user-attachments/assets/da499d64-c0dd-4eb2-ada1-480aa25c0ca7)
+![Compliance Bot](https://github.com/user-attachments/assets/477d95f5-53a4-4609-b2d5-c77e7b84dac9)
 
 <br />
 
