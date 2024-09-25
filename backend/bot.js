@@ -3,8 +3,8 @@ import { run } from "@xmtp/message-kit";
 const inMemoryCache = new Map();
 
 const complianceOfficerAddress =
-  "0x31c577E2875787069d3387A6dC409C89ADfA8B6B Compliance officer";
-const managerAddress = "0xbaa877F61b8Fe9D6F18023eA018df8c36e1E9014 Manager";
+  "0x31c577E2875787069d3387A6dC409C89ADfA8B6B";
+const managerAddress = "0xbaa877F61b8Fe9D6F18023eA018df8c36e1E9014";
 
 async function sendCustomerGreeting(context) {
   const greetingMessage =
